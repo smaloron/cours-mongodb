@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="m"
+                  name="mongodb" start-page="001-00-mongodb.md">
+
+    <toc-element topic="001-00-mongodb.md"/>
+    <toc-element topic="001-01-Mongo-Shell.md"/>
+    <toc-element topic="002-00-Selections-avancees.md">
+    </toc-element>
+    <toc-element topic="003-00-regex.md"/>
+    <toc-element topic="004-00-Liaisons-entre-les-documents.md"/>
+    <toc-element topic="005-00-Agregation.md"/>
+    <toc-element topic="006-00-Optimisation.md"/>
+    <toc-element topic="007-00-Adminstration.md"/>
+</instance-profile>
