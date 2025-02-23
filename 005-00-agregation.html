@@ -1,0 +1,279 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-23T18:21:36.480436"><title>Agr&eacute;gation | mongodb</title><script type="application/json" id="virtual-toc-data">[{"id":"quelques-exemples-simples","level":0,"title":"Quelques exemples simples","anchor":"#quelques-exemples-simples"},{"id":"les-fonctions-de-statistiques","level":0,"title":"Les fonctions de statistiques","anchor":"#les-fonctions-de-statistiques"},{"id":"travailler-sur-les-dates","level":0,"title":"Travailler sur les dates","anchor":"#travailler-sur-les-dates"},{"id":"unwind","level":0,"title":"Unwind","anchor":"#unwind"},{"id":"bucket","level":0,"title":"Bucket","anchor":"#bucket"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Agr&eacute;gation | mongodb"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="mongodb Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/005-00-agregation.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Agr&eacute;gation | mongodb"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/005-00-agregation.html#webpage",
+    "url": "writerside-documentation/005-00-agregation.html",
+    "name": "Agr&eacute;gation | mongodb",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "mongodb Help"
+}</script><!-- End Schema.org --></head><body data-id="005-00-Agregation" data-main-title="Agrégation" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>mongodb  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="005-00-Agregation" id="005-00-Agregation.md">Agrégation</h1><p id="lbm624_3">Le vrai mort que d'agr&eacute;gation est un syst&egrave;me qui permet de constituer une requ&ecirc;te &eacute;tape par &eacute;tape. Chaque op&eacute;rateur travaille sur le r&eacute;sultat de l'&eacute;tape pr&eacute;c&eacute;dente et retourne &eacute;ventuellement son r&eacute;sultat &agrave; l'&eacute;tape suivante.</p><p id="lbm624_4">L'ensemble des op&eacute;rations constituent un pipeline d'agr&eacute;gation qui part d'une collection et arrive &agrave; un r&eacute;sultat transform&eacute;.</p><style>.theme-dark .plantuml > svg {filter: hue-rotate(180deg) invert(0.9);}div.plantuml {overflow-x: auto;}</style><div class="plantuml"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="326px" preserveAspectRatio="none" style="width:107px;height:326px;background:#FFFFFF;" version="1.1" viewBox="0 0 107 326" width="107px" zoomAndPan="magnify"><defs/><g><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="75" x="16" y="11"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="55" x="26" y="32.6016">Collection</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="79" x="14" y="65.1328"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="59" x="24" y="86.7344">{ $match }</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="66" x="20.5" y="119.2656"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="46" x="30.5" y="140.8672">{ $sort }</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="78" x="14.5" y="173.3984"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="58" x="24.5" y="195">{ $group }</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="85" x="11" y="227.5313"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="65" x="21" y="249.1328">{ $project }</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="66" x="20.5" y="281.6641"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="46" x="30.5" y="303.2656">R&#233;sultat</text><line style="stroke:#181818;stroke-width:1.0;" x1="53.5" x2="53.5" y1="45.1328" y2="65.1328"/><polygon fill="#181818" points="49.5,55.1328,53.5,65.1328,57.5,55.1328,53.5,59.1328" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="53.5" x2="53.5" y1="99.2656" y2="119.2656"/><polygon fill="#181818" points="49.5,109.2656,53.5,119.2656,57.5,109.2656,53.5,113.2656" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="53.5" x2="53.5" y1="153.3984" y2="173.3984"/><polygon fill="#181818" points="49.5,163.3984,53.5,173.3984,57.5,163.3984,53.5,167.3984" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="53.5" x2="53.5" y1="207.5313" y2="227.5313"/><polygon fill="#181818" points="49.5,217.5313,53.5,227.5313,57.5,217.5313,53.5,221.5313" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="53.5" x2="53.5" y1="261.6641" y2="281.6641"/><polygon fill="#181818" points="49.5,271.6641,53.5,281.6641,57.5,271.6641,53.5,275.6641" style="stroke:#181818;stroke-width:1.0;"/><!--SRC=[itBEpyb9JIx9pC-pvhAgLb39JIn9pb2eXN2AyujAOEpqelpI0XYde2W_2wWBp0qwlBAuDASaiSGQ0000]--></g></svg></div><section class="chapter"><h2 id="quelques-exemples-simples" data-toc="quelques-exemples-simples">Quelques exemples simples</h2><p id="lbm624_11">Une seule op&eacute;ration, le compte des documents.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {$count: &quot;nombre de personnes&quot;}
+])
+</div><p id="lbm624_13">Nous ajoutons un filtre (<code class="code" id="lbm624_20">$match</code>) et comptons le nombre de documents filtr&eacute;s.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {$match: {gender: 'Femme'}},
+    {$count: &quot;nombre de femmes&quot;}
+])
+</div><p id="lbm624_15">Regroupement par genre</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $group: {
+            _id: '$gender',
+            nombre: { $sum: 1 }
+        }
+    }
+])
+</div><p id="lbm624_17">Ajout d'une projection qui renomme la clef <code class="code" id="lbm624_21">_id</code></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $group: {
+            _id: '$gender',
+            Nombre: { $sum: 1 }
+        }
+    },
+    {
+        $project: {
+            'Genre': '$_id',
+            _id: 0,
+            'Nombre': 1
+        }
+    }
+])
+</div><section class="chapter"><h3 id="a-vous" data-toc="a-vous">A vous</h3><section class="chapter"><h4 id="exercice-1" data-toc="exercice-1">Exercice 1</h4><p id="lbm624_24">Afficher la r&eacute;partition des nationalit&eacute;s dans la base avec un tri par ordre d&eacute;croissant du nombre de personnes</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h5 id="correction" data-toc="correction">Correction</h5></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+  {
+    $group: {
+      _id: '$nationality',
+      'Nombre de personnes': { $sum: 1 }
+    }
+  },
+  { $sort: { 'Nombre de personnes': -1 } }
+])
+</div></div></div></section></section><section class="chapter"><h4 id="exercice-2" data-toc="exercice-2">Exercice 2</h4><p id="lbm624_27">Afficher la somme des salaires annuels par ville de r&eacute;sidence</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h5 id="correction_1" data-toc="correction_1">Correction</h5></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+  {
+    $group: {
+      _id: &quot;$address.city&quot;,
+      'total': { $sum: yearlyIncome }
+    }
+  }
+])
+</div></div></div></section></section></section></section><section class="chapter"><h2 id="les-fonctions-de-statistiques" data-toc="les-fonctions-de-statistiques">Les fonctions de statistiques</h2><div class="table-wrapper"><table class="wide" id="lbm624_30"><thead><tr class="ijRowHead" id="lbm624_34"><th id="lbm624_42"><p>op&eacute;rateur</p></th><th id="lbm624_43"><p>description</p></th></tr></thead><tbody><tr id="lbm624_35"><td id="lbm624_44"><p>$sum</p></td><td id="lbm624_45"><p>somme</p></td></tr><tr id="lbm624_36"><td id="lbm624_46"><p>$avg</p></td><td id="lbm624_47"><p>moyenne</p></td></tr><tr id="lbm624_37"><td id="lbm624_48"><p>$count</p></td><td id="lbm624_49"><p>compte</p></td></tr><tr id="lbm624_38"><td id="lbm624_50"><p>$min</p></td><td id="lbm624_51"><p>minimum</p></td></tr><tr id="lbm624_39"><td id="lbm624_52"><p>$max</p></td><td id="lbm624_53"><p>maximum</p></td></tr><tr id="lbm624_40"><td id="lbm624_54"><p>$stdDevPop</p></td><td id="lbm624_55"><p>&eacute;cart type pr&eacute;cis</p></td></tr><tr id="lbm624_41"><td id="lbm624_56"><p>$stdDevSamp</p></td><td id="lbm624_57"><p>&eacute;cart type estim&eacute;</p></td></tr></tbody></table></div><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $group: {
+            _id: '$address.country',
+            'moyenne des salaires': { '$avg': '$yearlyIncome' },
+            'total de salaires': { '$sum': '$yearlyIncome' },
+            'max des salaires': { '$max': '$yearlyIncome' },
+            'min des salaires': { '$min': '$yearlyIncome' },
+            'écart type des salaires': { '$stdDevPop': '$yearlyIncome' },
+            'écart type des salaires estimé': { '$stdDevSamp': '$yearlyIncome' },
+            'nombre de personnes': { '$sum': 1 }
+        }
+    }
+])
+</div><aside class="prompt" data-type="tip" data-title="" id="lbm624_32"><p id="lbm624_58">Note : Pour compter dans un regroupement nous devons utiliser <code class="code" id="lbm624_59">$sum: 1</code>. L'op&eacute;rateur <code class="code" id="lbm624_60">$count</code> ne sert qu'&agrave; compter apr&egrave;s un filtre.</p></aside><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {$match: {gender: 'Homme'}},
+    {$count: &quot;Nombre d'hommes&quot;}
+])
+
+</div></section><section class="chapter"><h2 id="travailler-sur-les-dates" data-toc="travailler-sur-les-dates">Travailler sur les dates</h2><div class="table-wrapper"><table class="wide" id="lbm624_61"><thead><tr class="ijRowHead" id="lbm624_63"><th id="lbm624_79"><p>Op&eacute;rateur / Fonction</p></th><th id="lbm624_80"><p>Description en Fran&ccedil;ais</p></th></tr></thead><tbody><tr id="lbm624_64"><td id="lbm624_81"><p><code class="code" id="lbm624_83">new Date()</code></p></td><td id="lbm624_82"><p>Cr&eacute;e une nouvelle date avec l'heure actuelle.</p></td></tr><tr id="lbm624_65"><td id="lbm624_84"><p><code class="code" id="lbm624_86">ISODate(&quot;YYYY-MM-DD&quot;)</code></p></td><td id="lbm624_85"><p>D&eacute;finit une date au format ISO 8601.</p></td></tr><tr id="lbm624_66"><td id="lbm624_87"><p><code class="code" id="lbm624_89">$year</code></p></td><td id="lbm624_88"><p>Extrait <span class="control" id="lbm624_90">l'ann&eacute;e</span> d'un champ de type <code class="code" id="lbm624_91">Date</code>.</p></td></tr><tr id="lbm624_67"><td id="lbm624_92"><p><code class="code" id="lbm624_94">$month</code></p></td><td id="lbm624_93"><p>Extrait <span class="control" id="lbm624_95">le mois</span> d'un champ de type <code class="code" id="lbm624_96">Date</code>.</p></td></tr><tr id="lbm624_68"><td id="lbm624_97"><p><code class="code" id="lbm624_99">$dayOfMonth</code></p></td><td id="lbm624_98"><p>Extrait <span class="control" id="lbm624_100">le jour du mois</span> d'un champ de type <code class="code" id="lbm624_101">Date</code>.</p></td></tr><tr id="lbm624_69"><td id="lbm624_102"><p><code class="code" id="lbm624_104">$hour</code></p></td><td id="lbm624_103"><p>Extrait <span class="control" id="lbm624_105">l'heure</span> d'un champ de type <code class="code" id="lbm624_106">Date</code>.</p></td></tr><tr id="lbm624_70"><td id="lbm624_107"><p><code class="code" id="lbm624_109">$minute</code></p></td><td id="lbm624_108"><p>Extrait <span class="control" id="lbm624_110">les minutes</span> d'un champ de type <code class="code" id="lbm624_111">Date</code>.</p></td></tr><tr id="lbm624_71"><td id="lbm624_112"><p><code class="code" id="lbm624_114">$second</code></p></td><td id="lbm624_113"><p>Extrait <span class="control" id="lbm624_115">les secondes</span> d'un champ de type <code class="code" id="lbm624_116">Date</code>.</p></td></tr><tr id="lbm624_72"><td id="lbm624_117"><p><code class="code" id="lbm624_119">$millisecond</code></p></td><td id="lbm624_118"><p>Extrait <span class="control" id="lbm624_120">les millisecondes</span> d'un champ de type <code class="code" id="lbm624_121">Date</code>.</p></td></tr><tr id="lbm624_73"><td id="lbm624_122"><p><code class="code" id="lbm624_124">$dayOfWeek</code></p></td><td id="lbm624_123"><p>Extrait <span class="control" id="lbm624_125">le jour de la semaine</span> (1=Dimanche, 7=Samedi).</p></td></tr><tr id="lbm624_74"><td id="lbm624_126"><p><code class="code" id="lbm624_128">$dateToString</code></p></td><td id="lbm624_127"><p>Convertit une date en cha&icirc;ne de caract&egrave;res avec un format personnalis&eacute;.</p></td></tr><tr id="lbm624_75"><td id="lbm624_129"><p><code class="code" id="lbm624_131">$add</code></p></td><td id="lbm624_130"><p>Ajoute un nombre de millisecondes &agrave; une date.</p></td></tr><tr id="lbm624_76"><td id="lbm624_132"><p><code class="code" id="lbm624_134">$subtract</code></p></td><td id="lbm624_133"><p>Soustrait un nombre de millisecondes &agrave; une date.</p></td></tr><tr id="lbm624_77"><td id="lbm624_135"><p><code class="code" id="lbm624_137">$dateFromString</code></p></td><td id="lbm624_136"><p>Convertit une cha&icirc;ne en un objet <code class="code" id="lbm624_138">Date</code>.</p></td></tr><tr id="lbm624_78"><td id="lbm624_139"><p><code class="code" id="lbm624_141">$dateToString</code> avec <code class="code" id="lbm624_142">timezone</code></p></td><td id="lbm624_140"><p>Convertit une date en texte en <span class="control" id="lbm624_143">ajustant le fuseau horaire</span>.</p></td></tr></tbody></table></div><section class="chapter"><h3 id="exemples" data-toc="exemples">Exemples</h3><p id="lbm624_144">Extraction de l'ann&eacute;e de naissance. Ici l'utilisation de <code class="code" id="lbm624_152">$dateFromString</code> est obligatoire car les dates ont &eacute;t&eacute; import&eacute;es comme des cha&icirc;nes de caract&egrave;res.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $project: {
+            _id: 0,
+            lastName: 1,
+            'année de naissance': {
+                $year: {
+                    $dateFromString: {
+                        dateString: &quot;$birthDate&quot;
+                    }
+                }
+            },
+        }
+    }
+]);
+</div><p id="lbm624_146">Conversion des dates de naissance dans un nouveau champ <code class="code" id="lbm624_153">dateOfBirth</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.updateMany(
+    {},  
+    [{
+       $set: {
+           dateOfBirth: { 
+               $dateFromString: { dateString: &quot;$birthDate&quot; } 
+           }
+       }
+    }]
+);
+</div><p id="lbm624_148">Nous pouvons d&eacute;sormais &eacute;crire une requ&ecirc;te plus simple</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $project: {
+            _id: 0,
+            lastName: 1,
+            'année de naissance': {
+                $year: '$dateOfBirth'
+            },
+        }
+    }
+]);
+</div><p id="lbm624_150">Calcul de l'&acirc;ge</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $project: {
+            lastName: 1,
+            age: {
+                $dateDiff: {
+                    startDate: &quot;$dateOfBirth&quot;,
+                    endDate: &quot;$$NOW&quot;, // Date actuelle
+                    unit: &quot;year&quot;
+                }
+            }
+        }
+    }
+]);
+</div></section></section><section class="chapter"><h2 id="unwind" data-toc="unwind">Unwind</h2><p id="lbm624_154">l'op&eacute;ration <code class="code" id="lbm624_162">$unwind</code> (dissocier) d&eacute;construit un tableau et retourne une ligne par &eacute;l&eacute;ment.</p><p id="lbm624_155"><span class="control" id="lbm624_163">Exemple</span> La requ&ecirc;te suivante affiche le tableau des hobbies d'une personne.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {$match: {_id: ObjectId('67a913ea9c516e055a2574da')}},
+    {$project: {hobbies:1}}
+])
+</div><figure id="lbm624_157"><img alt="CleanShot 2025-02-12 at 07.37.15@2x.png" src="images/CleanShot%202025-02-12%20at%2007.37.15%402x.png" title="CleanShot 2025-02-12 at 07.37.15@2x.png" width="1178" height="132"></figure><p id="lbm624_158">La m&ecirc;me requ&ecirc;te avec une op&eacute;ration <code class="code" id="lbm624_164">$unwind</code> donnera une ligne par hobby.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {$match: {_id: ObjectId('67a913ea9c516e055a2574da')}},
+    {$unwind: '$hobbies'},
+    {$project: {hobbies:1}}
+])
+</div><figure id="lbm624_160"><img alt="CleanShot 2025-02-12 at 07.39.57@2x.png" src="images/CleanShot%202025-02-12%20at%2007.39.57%402x.png" title="CleanShot 2025-02-12 at 07.39.57@2x.png" width="1040" height="202"></figure><section class="chapter"><h3 id="quelques-exemples" data-toc="quelques-exemples"><span class="control" id="lbm624_175">Quelques exemples</span></h3><p id="lbm624_166"><span class="control" id="lbm624_176">Compter la fr&eacute;quence des hobbies</span><br></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+  { $unwind: &quot;$hobbies&quot; },
+  { $group: { _id: &quot;$hobbies&quot;, nombre: { $sum: 1 } } },
+  { $sort: { nombre: -1 } }
+])
+</div><p id="lbm624_168"><br> <span class="control" id="lbm624_179">Afficher les informations de l'emploi actuel</span></p><p id="lbm624_169">Quand le tableau contient des objets, il faut une projection pour que chaque &eacute;l&eacute;ment de l'objet apparaisse dans sa propre colonne.</p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    { $unwind: '$jobHistory' },
+    { $match: {'jobHistory.leftAt': null}},
+    { $sort: { 'jobHistory.joinedAt': 1 } },
+    {
+        $project: {
+            firstName: 1,
+            lastName: 1,
+            jobTitle: '$jobHistory.jobTitle',
+            company: '$jobHistory.company',
+            joinedAt: '$jobHistory.joinedAt'
+        }
+    }
+])
+</div><br><p id="lbm624_172"><span class="control" id="lbm624_180">Compter le nombre d'employ&eacute;s par soci&eacute;t&eacute;s</span></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+  { $unwind: &quot;$jobHistory&quot; },
+  { $match: {'jobHistory.leftAt': null}},
+  { $group: { _id: &quot;$jobHistory.company&quot;, count: { $sum: 1 } } },
+  { $sort: { count: -1 } }
+])
+</div><aside class="prompt" data-type="tip" data-title="" id="lbm624_174"><p id="lbm624_181">Essayez d'ajouter un crit&egrave;re pour obtenir le nombre de personnes employ&eacute;es entre 2000 et 2010</p></aside></section></section><section class="chapter"><h2 id="bucket" data-toc="bucket">Bucket</h2><p id="lbm624_182">L'op&eacute;rateur <code class="code" id="lbm624_191">$bucket</code> r&eacute;alise un regroupement selon des intervalles pr&eacute;d&eacute;finis.</p><p id="lbm624_183"><span class="control" id="lbm624_192">Exemple : les salaires par tranche</span></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $bucket: {
+            groupBy: &quot;$yearlyIncome&quot;,
+            boundaries: [0, 20000, 40000, 60000, 80000],
+            default: &quot;80k+&quot;,
+            output: {
+                nombre: { $sum: 1 },
+            }
+        }
+    }
+])
+</div><ul class="list _bullet" id="lbm624_185"><li class="list__item" id="lbm624_193"><p><code class="code" id="lbm624_197">groupBy</code>: le champ sur lequel regrouper</p></li><li class="list__item" id="lbm624_194"><p><code class="code" id="lbm624_198">boudaries</code>: un tableau ordinale les valeurs, attention l'ordre doit &ecirc;tre croissant</p></li><li class="list__item" id="lbm624_195"><p><code class="code" id="lbm624_199">default</code>: le lib&eacute;ll&eacute; pour les valeurs hors de la borne sup&eacute;rieure de l'intervalle</p></li><li class="list__item" id="lbm624_196"><p><code class="code" id="lbm624_200">output</code>: les champs de sortie, cela inclus g&eacute;n&eacute;ralement une fonction statistique</p></li></ul><p id="lbm624_186"><span class="control" id="lbm624_201">Regroupement par tranche d'&acirc;ge</span></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    // Addfields pour calculer l'âge 
+    // et simplifier le regroupement
+    {
+        $addFields: {
+            age: {
+                $dateDiff: {
+                    startDate: '$dateOfBirth',
+                    // $$NOW représente la date en cours
+                    endDate: '$$NOW',
+                    unit: 'year'
+                }
+            }
+        }
+    },
+    
+    // Regroupement par tranche d'âge
+    {
+        $bucket: {
+            groupBy: '$age',
+            boundaries: [0, 10, 20, 30, 40, 50],
+            default: '50+',
+            output: {
+                count: { $sum: 1 },
+                averageIncome: { $avg: '$yearlyIncome' }
+            }
+        }
+    },
+    
+    // Projection pour formater la moyenne
+    {$project: {
+        count: 1, 
+        averageIncome: {$trunc: '$averageIncome'}
+    }}
+])
+
+</div><p id="lbm624_188"><span class="control" id="lbm624_202">Statistique sur les ann&eacute;es d'exp&eacute;rience</span></p><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    {
+        $addFields: {
+            // Calcul du nombre d'années d'expérience
+            careerDuration: {
+                // $sum travaille sur un tableau ordinal de nombres
+                $sum: {
+                    // $map retourne un tel tableau
+                    $map: {
+                        // la source
+                        input: '$jobHistory',
+                        // la variable représentant la valeur en cours
+                        as: 'job',
+                        // le calcul à réaliser pour chaque élément
+                        // double $ pour faire référence à la valeur en cours
+                        in: { $subtract: [ '$$job.leftAt', '$$job.joinedAt' ] }
+                    }
+                }
+            }
+        }
+    },
+    {
+        $bucket: {
+            groupBy: '$careerDuration',
+            boundaries: [0, 5, 10, 20, 30, 50],
+            default: '50+',
+            output: { count: { $sum: 1 } }
+        }
+    }
+])
+
+</div><section class="chapter"><h3 id="exercices" data-toc="exercices">Exercices</h3><section class="chapter"><h4 id="exercice-1_1" data-toc="exercice-1_1">Exercice 1</h4><p id="lbm624_205">Compter le nombre de comp&eacute;tences informatiques et regrouper par tranches (0, 2, 5, 10, 10+)</p></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h4 id="correction_2" data-toc="correction_2">correction</h4></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.aggregate([
+    // Ne traite que les documents 
+    // qui possèdent la clef computerSkills
+    {$match: {computerSkills: {$exists: 1}}},
+    {
+        $bucket: {
+            groupBy: { $size: '$computerSkills' },
+            boundaries: [0, 2, 5, 10],
+            default: '10+',
+            output: { count: { $sum: 1 } }
+        }
+    }
+])
+</div></div></div></section></section></section><div class="last-modified">Last modified: 23 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="004-00-liaisons-entre-les-documents.html" class="navigation-links__prev">Liaisons entre les documents</a><a href="006-00-optimisation.html" class="navigation-links__next">Optimisation</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>

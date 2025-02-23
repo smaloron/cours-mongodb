@@ -1,0 +1,198 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-23T18:21:36.480437"><title>S&eacute;lections avanc&eacute;es | mongodb</title><script type="application/json" id="virtual-toc-data">[{"id":"les-op-rateurs-de-comparaison","level":0,"title":"Les opérateurs de comparaison","anchor":"#les-op-rateurs-de-comparaison"},{"id":"op-rateurs-combinatoires","level":0,"title":"Opérateurs combinatoires","anchor":"#op-rateurs-combinatoires"},{"id":"recherche-dans-les-tableaux","level":0,"title":"Recherche dans les tableaux","anchor":"#recherche-dans-les-tableaux"},{"id":"exercices","level":0,"title":"Exercices","anchor":"#exercices"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="S&eacute;lections avanc&eacute;es | mongodb"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="mongodb Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/002-00-selections-avancees.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="S&eacute;lections avanc&eacute;es | mongodb"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/002-00-selections-avancees.html#webpage",
+    "url": "writerside-documentation/002-00-selections-avancees.html",
+    "name": "S&eacute;lections avanc&eacute;es | mongodb",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "mongodb Help"
+}</script><!-- End Schema.org --></head><body data-id="002-00-Selections-avancees" data-main-title="Sélections avancées" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>mongodb  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="002-00-Selections-avancees" id="002-00-Selections-avancees.md">Sélections avancées</h1><section class="chapter"><h2 id="les-op-rateurs-de-comparaison" data-toc="les-op-rateurs-de-comparaison">Les op&eacute;rateurs de comparaison</h2><section class="chapter"><h3 id="galit-et-diff-rence" data-toc="galit-et-diff-rence">&Eacute;galit&eacute; et diff&eacute;rence</h3><p id="-gmj3s4_10">l'op&eacute;rateur d'&eacute;galit&eacute; n'est pas tr&egrave;s utile car nous obtenons la m&ecirc;me chose avec un syntaxe plus simple. Il nous permet cependant d'introduire l'utilisation des op&eacute;rateurs.</p><ul class="list _bullet" id="-gmj3s4_11"><li class="list__item" id="-gmj3s4_16"><p>Un op&eacute;rateur commence par un $.</p></li><li class="list__item" id="-gmj3s4_17"><p>Un op&eacute;rateur est toujours contenu dans son propre objet</p></li></ul><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {gender: 'Femme'}
+)
+</div><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {   
+        gender: {$eq : 'Femme'}
+    }
+)
+</div><p id="-gmj3s4_14">Exactement le m&ecirc;me effet, mais un niveau d'accolade en moins avec la premi&egrave;re syntaxe.</p><section class="chapter"><h4 id="op-rateur-de-diff-rence" data-toc="op-rateur-de-diff-rence">Op&eacute;rateur de diff&eacute;rence</h4><p id="-gmj3s4_18">Il s'agit de la n&eacute;gation de l'op&eacute;rateur d'&eacute;galit&eacute; (not equal).</p><p id="-gmj3s4_19">Exemple, Les personnes &eacute;trang&egrave;res vivant au Royaume-Uni :</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    &quot;address.country&quot;: 'Royaume-Uni',
+    nationality: {$ne: 'Royaume-Uni'}
+})
+</div></section></section><section class="chapter"><h3 id="comparaison-num-rique" data-toc="comparaison-num-rique">Comparaison num&eacute;rique</h3><div class="table-wrapper"><table class="wide" id="-gmj3s4_21"><thead><tr class="ijRowHead" id="-gmj3s4_27"><th id="-gmj3s4_32"><p>Op&eacute;rateur</p></th><th id="-gmj3s4_33"><p>Description</p></th></tr></thead><tbody><tr id="-gmj3s4_28"><td id="-gmj3s4_34"><p>$gt</p></td><td id="-gmj3s4_35"><p>sup&eacute;rieur (greater than)</p></td></tr><tr id="-gmj3s4_29"><td id="-gmj3s4_36"><p>$gte</p></td><td id="-gmj3s4_37"><p>sup&eacute;rieur ou &eacute;gal</p></td></tr><tr id="-gmj3s4_30"><td id="-gmj3s4_38"><p>$lt</p></td><td id="-gmj3s4_39"><p>inf&eacute;rieur (lesser than)</p></td></tr><tr id="-gmj3s4_31"><td id="-gmj3s4_40"><p>$lte</p></td><td id="-gmj3s4_41"><p>inf&eacute;rieur ou &eacute;gal</p></td></tr></tbody></table></div><p id="-gmj3s4_22">Exemple, les personnes qui gagnent plus de 50 000 par an.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    yearlyIncome: {$gt: 50000}
+})
+</div><p id="-gmj3s4_24">Ou bien les personnes qui gagnent entre 30 000 et 35 000.</p><p id="-gmj3s4_25">Ici, nous groupons deux conditions dans un m&ecirc;me objet ce qui a le m&ecirc;me effet qu'un <code class="code" id="-gmj3s4_42">AND</code> en <code class="code" id="-gmj3s4_43">SQL</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    yearlyIncome: {$gt: 30000, $lt: 35000}
+})
+</div></section><section class="chapter"><h3 id="comparaison-de-deux-clefs" data-toc="comparaison-de-deux-clefs">Comparaison de deux clefs</h3><p id="-gmj3s4_44">Pour comparer deux clefs d'un m&ecirc;me document, il faut utiliser l'op&eacute;rateur <code class="code" id="-gmj3s4_48">$expr</code> et lui passer deux &eacute;l&eacute;ments :</p><ul class="list _bullet" id="-gmj3s4_45"><li class="list__item" id="-gmj3s4_49"><p>un op&eacute;rateur de comparaison</p></li><li class="list__item" id="-gmj3s4_50"><p>un tableau ordinal des clefs &agrave; comparer, les noms des champs doivent &ecirc;tre pr&eacute;fix&eacute;s avec un $.</p></li></ul><p id="-gmj3s4_46">Exemple, toutes les personnes dont le pays de r&eacute;sidence est diff&eacute;rent de la nationalit&eacute;.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $expr: {
+        $ne: ['$nationality', '$address.country']
+    }
+})
+</div></section></section><section class="chapter"><h2 id="op-rateurs-combinatoires" data-toc="op-rateurs-combinatoires">Op&eacute;rateurs combinatoires</h2><p id="-gmj3s4_51">En MongoDB, les op&eacute;rateurs combinatoires permettent de combiner plusieurs conditions dans une requ&ecirc;te pour affiner les r&eacute;sultats.</p><p id="-gmj3s4_52">Ces op&eacute;rateurs admettent en argument un tableau de crit&egrave;res.</p><section class="chapter"><h3 id="l-op-rateur-and" data-toc="l-op-rateur-and">L'op&eacute;rateur $and</h3><p id="-gmj3s4_58">Permet de joindre une liste de conditions o&ugrave; toutes doivent &ecirc;tre vraies.</p><div class="code-block" data-lang="mongodb">
+{ &quot;$and&quot;: [ { condition1 }, { condition2 } ] }
+</div><p id="-gmj3s4_60">MongoDB applique implicitement <code class="code" id="-gmj3s4_63">$and</code> lorsque l'objet sp&eacute;cifie plusieurs crit&egrave;res. Ainsi les deux requ&ecirc;tes suivantes sont &eacute;quivalentes.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    firstName: 'Sophie',
+    nationality: 'France'
+})
+</div><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $and: [
+        {firstName: 'Sophie'},
+        {nationality: 'France'}
+    ]
+})
+</div></section><section class="chapter"><h3 id="l-op-rateur-or" data-toc="l-op-rateur-or">L'op&eacute;rateur $or</h3><p id="-gmj3s4_64">Permet de joindre une liste de conditions o&ugrave; au moins l'une d'entre elles doit &ecirc;tre vraie.</p><div class="code-block" data-lang="mongodb">
+{ &quot;$or&quot;: [ { condition1 }, { condition2 } ] }
+</div><p id="-gmj3s4_66">Les personnes vivant &agrave; Lyon ou &agrave; paris</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $or: [
+        { &quot;address.city&quot;: &quot;Lyon&quot; },
+        { &quot;address.city&quot;: &quot;Paris&quot; }
+    ]
+})
+</div><aside class="prompt" data-type="tip" data-title="" id="-gmj3s4_68"><p id="-gmj3s4_69">Attention, pour combiner un op&eacute;rateur <code class="code" id="-gmj3s4_70">$or</code> avec d'autres crit&egrave;res, il faut imp&eacute;rativement encadrer les deux propositions dans un <code class="code" id="-gmj3s4_71">$and</code>.</p></aside></section><section class="chapter"><h3 id="combinaison-des-deux-op-rateurs" data-toc="combinaison-des-deux-op-rateurs">Combinaison des deux op&eacute;rateurs</h3><p id="-gmj3s4_72">Les personnes ayant un revenu entre 50 000 et 70 000 ET ayant travaill&eacute; chez Google ou Amazon.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $and: [
+        { yearlyIncome: { $gte: 50000, $lte: 70000 } },
+        { $or: [ 
+            { &quot;jobHistory.company&quot;: &quot;Google&quot; }, 
+            { &quot;jobHistory.company&quot;: &quot;Amazon&quot; } 
+        ]}
+    ]
+})
+</div></section><section class="chapter"><h3 id="l-op-rateur-not" data-toc="l-op-rateur-not">L'op&eacute;rateur $not</h3><p id="-gmj3s4_74">L'op&eacute;rateur $not permet d'inverser une condition. Il est souvent utilis&eacute; avec des op&eacute;rateurs de comparaison.</p><div class="code-block" data-lang="mongodb">
+{ &quot;clef&quot;: { &quot;$not&quot;: { &quot;opérateur&quot;: &quot;valeur&quot; } } }
+</div><p id="-gmj3s4_76">Les personnes qui n'habitent pas en France.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    &quot;address.country&quot;: { $not: { $eq: &quot;France&quot; } }
+})
+</div><p id="-gmj3s4_78">Pour l'inversion d'un &eacute;galit&eacute; nous pouvons simplifier la syntaxe avec l'op&eacute;rateur <code class="code" id="-gmj3s4_80">$ne</code> (not equal).</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    &quot;address.country&quot;: { $ne: &quot;France&quot; }
+})
+</div></section><section class="chapter"><h3 id="combinaison-des-trois-op-rateurs" data-toc="combinaison-des-trois-op-rateurs">Combinaison des trois op&eacute;rateurs</h3><p id="-gmj3s4_81">Les personnes vivant en France ou en Belgique ET qui n'ont jamais travaill&eacute; pour IBM ou Amazon.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $and: [
+        {
+            $or: [
+                {&quot;address.country&quot;: &quot;France&quot;},
+                {&quot;address.country&quot;: &quot;Belgique&quot;}
+            ]
+        },
+        {
+            $or: [
+                {&quot;jobHistory.company&quot;: {$not: {$eq: &quot;IBM&quot;}}},
+                {&quot;jobHistory.company&quot;: {$not: {$eq: &quot;Amazon&quot;}}}
+            ]
+        }
+    ]
+})
+
+</div></section></section><section class="chapter"><h2 id="recherche-dans-les-tableaux" data-toc="recherche-dans-les-tableaux">Recherche dans les tableaux</h2><p id="-gmj3s4_83">Cette requ&ecirc;te retourne toutes les personnes qui poss&egrave;dent &quot;Bricolage&quot; dans le tableau des hobbies.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    hobbies: &quot;Bricolage&quot;
+})
+</div><p id="-gmj3s4_85">Pour requ&ecirc;ter sur plusieurs valeurs il nous faut utiliser un op&eacute;rateur</p><section class="chapter"><h3 id="obtenir-tous-les-l-ments" data-toc="obtenir-tous-les-l-ments">Obtenir tous les &eacute;l&eacute;ments</h3><p id="-gmj3s4_90">Toutes les personnes qui poss&egrave;dent les deux hobbies</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    hobbies: {
+        $all: [&quot;Bricolage&quot;, &quot;Astronomie&quot;]
+    }
+})
+</div></section><section class="chapter"><h3 id="obtenir-au-moins-un-l-ment" data-toc="obtenir-au-moins-un-l-ment">Obtenir au moins un &eacute;l&eacute;ment</h3><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    hobbies: {
+        $in: [&quot;Bricolage&quot;, &quot;Astronomie&quot;]
+    }
+})
+</div><p id="-gmj3s4_93">Il existe &eacute;galement un op&eacute;rateur <code class="code" id="-gmj3s4_94">$nin</code> (not in)</p></section><section class="chapter"><h3 id="v-rifier-la-taille-d-un-tableau" data-toc="v-rifier-la-taille-d-un-tableau">V&eacute;rifier la taille d'un tableau</h3><p id="-gmj3s4_95">Les personnes qui n'ont qu'un seul hobby</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    hobbies: { $size: 1 }
+})
+</div><section class="chapter"><h4 id="comparaison-sur-la-taille-d-un-tableau" data-toc="comparaison-sur-la-taille-d-un-tableau">Comparaison sur la taille d'un tableau</h4><p id="-gmj3s4_99">Cette requ&ecirc;te est invalide, car l'op&eacute;rateur de comparaison ne peut &ecirc;tre au premier niveau (top level operator).</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    { &quot;$gte&quot;: [{ &quot;$size&quot;: &quot;$hobbies&quot; }, 2] }
+)
+</div><p id="-gmj3s4_101">La solution est d'encadrer dans un op&eacute;rateur <code class="code" id="-gmj3s4_104">$expr</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    &quot;$expr&quot;:
+        { &quot;$gt&quot;: [{ &quot;$size&quot;: &quot;$hobbies&quot; }, 3] }
+})
+</div><section class="chapter"><h5 id="astuce" data-toc="astuce">Astuce</h5><p id="-gmj3s4_105">Il est &eacute;galement possible de tester la pr&eacute;sence d'une clef dans un tableau ordinal. Ici, s'il existe une clef 2, c'est donc que le tableau contient au moins trois &eacute;l&eacute;ments (la premi&egrave;re clef &eacute;tant 0).</p><div class="code-block" data-lang="none">
+db.persons.find({
+    &quot;hobbies.2&quot;: { &quot;$exists&quot;: true }
+})
+</div><p id="-gmj3s4_107">Les personnes qui ont au maximum deux hobbies (pas de clef 2 dans le tableau).</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+        {&quot;hobbies.2&quot;: { &quot;$exists&quot;: false }}
+)
+</div></section></section><section class="chapter"><h4 id="le-nombre-d-l-ments-entre-deux-bornes" data-toc="le-nombre-d-l-ments-entre-deux-bornes">Le nombre d'&eacute;l&eacute;ments entre deux bornes</h4><p id="-gmj3s4_109">Pour utiliser deux crit&egrave;res dans l'op&eacute;rateur <code class="code" id="-gmj3s4_111">$expr</code>, il faudra encadrer ces crit&egrave;res dans un <code class="code" id="-gmj3s4_112">$and</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    &quot;$expr&quot;: {
+        &quot;$and&quot;: [
+            { &quot;$gte&quot;: [{ &quot;$size&quot;: &quot;$hobbies&quot; }, 2] },
+            { &quot;$lte&quot;: [{ &quot;$size&quot;: &quot;$hobbies&quot; }, 3] }
+        ]
+    }
+})
+</div></section></section><section class="chapter"><h3 id="rechercher-dans-un-tableau-de-documents" data-toc="rechercher-dans-un-tableau-de-documents">Rechercher dans un tableau de documents</h3><p id="-gmj3s4_113">Filtre les documents o&ugrave; au moins un &eacute;l&eacute;ment d'un tableau correspond &agrave; plusieurs crit&egrave;res.</p><p id="-gmj3s4_114">Les personnes qui ont une exp&eacute;rience de consultant d&eacute;butant apr&egrave;s 2015.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+  &quot;jobHistory&quot;: {
+    &quot;$elemMatch&quot;: {
+      &quot;jobTitle&quot;: &quot;Consultant&quot;,
+      &quot;joinedAt&quot;: { &quot;$gt&quot;: 2015 }
+    }
+  }
+})
+</div></section></section><section class="chapter"><h2 id="exercices" data-toc="exercices">Exercices</h2><section class="chapter"><h3 id="exercice-1" data-toc="exercice-1">Exercice 1</h3><p id="-gmj3s4_120">S&eacute;lectionner toutes les personnes qui ont un revenu annuel sup&eacute;rieur &agrave; 60 000 et qui travaillent actuellement.</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h4 id="correction" data-toc="correction">Correction</h4></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    yearlyIncome: { $gt: 60000 },
+    'jobHistory.leftAt': null
+})
+</div></div></div></section></section><section class="chapter"><h3 id="exercice-2" data-toc="exercice-2">Exercice 2</h3><p id="-gmj3s4_123">S&eacute;lectionner les personnes qui vivent dans un pays diff&eacute;rent de leur nationalit&eacute;.</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h4 id="correction_1" data-toc="correction_1">Correction</h4></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $expr: {
+        $ne: ['$nationality', '$address.country']
+    }
+})
+</div></div></div></section></section><section class="chapter"><h3 id="exercice-3" data-toc="exercice-3">Exercice 3</h3><p id="-gmj3s4_126">S&eacute;lectionner les personnes qui ont travaill&eacute; dans une entreprise, mais qui sont actuellement ind&eacute;pendantes.</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h4 id="correction_2" data-toc="correction_2">Correction</h4></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    $and: [
+        {
+            jobHistory: {
+                $elemMatch: {
+                    company: 'None (Self-Employed)',
+                    leftAt: null
+                }
+            }
+        },
+        {
+            'jobHistory.1': {$exists: true}
+        }
+    ]
+})
+</div></div></div></section></section><section class="chapter"><h3 id="exercice-4" data-toc="exercice-4">Exercice 4</h3><p id="-gmj3s4_129">S&eacute;lectionner les personnes qui ont eu au moins un emploi dans une entreprise sp&eacute;cifique (ex: &quot;Facebook&quot;) entre 2010 et 2020.</p><section class="chapter"><div class="collapse"><div class="collapse__title"><h4 id="correction_3" data-toc="correction_3">Correction</h4></div><div class="collapse__content"><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    jobHistory: { 
+        $elemMatch: { 
+            company: 'Facebook',
+            joinedAt: { $gte: 2010 },
+            leftAt: { $lte: 2020 }
+        } 
+    }
+})
+</div></div></div></section></section></section><div class="last-modified">Last modified: 23 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="001-01-mongo-shell.html" class="navigation-links__prev">Les op&eacute;rations</a><a href="003-00-regex.html" class="navigation-links__next">Expressions r&eacute;guli&egrave;res</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>

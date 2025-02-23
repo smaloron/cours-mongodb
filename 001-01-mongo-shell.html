@@ -1,0 +1,295 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-23T18:21:36.480436"><title>Les op&eacute;rations | mongodb</title><script type="application/json" id="virtual-toc-data">[{"id":"d-finir-la-base-de-donn-es-active","level":0,"title":"Définir la base de données active","anchor":"#d-finir-la-base-de-donn-es-active"},{"id":"cr-er-une-collection","level":0,"title":"Créer une collection","anchor":"#cr-er-une-collection"},{"id":"importation-de-documents","level":0,"title":"Importation de documents","anchor":"#importation-de-documents"},{"id":"s-lection-de-documents","level":0,"title":"Sélection de documents","anchor":"#s-lection-de-documents"},{"id":"suppression-de-documents","level":0,"title":"Suppression de documents","anchor":"#suppression-de-documents"},{"id":"mise-jour-de-documents","level":0,"title":"Mise à jour de documents","anchor":"#mise-jour-de-documents"},{"id":"exercice","level":0,"title":"Exercice","anchor":"#exercice"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Les op&eacute;rations | mongodb"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="mongodb Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/001-01-mongo-shell.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Les op&eacute;rations | mongodb"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/001-01-mongo-shell.html#webpage",
+    "url": "writerside-documentation/001-01-mongo-shell.html",
+    "name": "Les op&eacute;rations | mongodb",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "mongodb Help"
+}</script><!-- End Schema.org --></head><body data-id="001-01-Mongo-Shell" data-main-title="Les opérations" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>mongodb  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="001-01-Mongo-Shell" id="001-01-Mongo-Shell.md">Les opérations</h1><section class="chapter"><h2 id="d-finir-la-base-de-donn-es-active" data-toc="d-finir-la-base-de-donn-es-active">D&eacute;finir la base de donn&eacute;es active</h2><p id="-6cojb9_10">La base de donn&eacute;es active est celle sur laquelle s'ex&eacute;cuterons les actions. Si la base demand&eacute;e n'existe pas, elle sera automatiquement cr&eacute;&eacute;e.</p><div class="code-block" data-lang="mongodb">
+use &lt;nom de la base de données&gt;
+</div><p id="-6cojb9_12">exemple</p><div class="code-block" data-lang="mongodb">
+use formation
+</div><p id="-6cojb9_14">Nous pouvons lister les base de donn&eacute;es avec la commande suivante :</p><div class="code-block" data-lang="mongodb">
+show dbs
+</div></section><section class="chapter"><h2 id="cr-er-une-collection" data-toc="cr-er-une-collection">Cr&eacute;er une collection</h2><p id="-6cojb9_16">La cr&eacute;ation d'une collection est &eacute;galement automatique, il suffit de cr&eacute;er un nouveau document dans une collection inexistante.</p><p id="-6cojb9_17">Nous pouvons lister les collections avec la commande suivante :</p><div class="code-block" data-lang="mongodb">
+show collections
+</div><section class="chapter"><h3 id="insertion-d-un-document" data-toc="insertion-d-un-document">Insertion d'un document</h3><div class="code-block" data-lang="mongodb">
+db.&lt;nom de la collection&gt;.insertOne({&lt;données&gt;})
+</div><p id="-6cojb9_23">Par exemple</p><div class="code-block" data-lang="mongodb">
+db.persons.insertOne({
+    name: &quot;Brahé&quot;, 
+    firstName: &quot;Tycho&quot;, 
+    job: &quot;Astronome&quot;
+})
+</div><p id="-6cojb9_25">Cr&eacute;ation d'une autre personne</p><div class="code-block" data-lang="mongodb">
+db.persons.insertOne({
+    name: &quot;Malcolm&quot;, 
+    firstName: &quot;Reynolds&quot;, 
+    job: &quot;Capitaine&quot;, 
+    movie: &quot;Firefly&quot;
+ })
+</div><figure id="-6cojb9_27"><img alt="CleanShot 2025-02-04 at 19.41.56@2x.png" src="images/CleanShot%202025-02-04%20at%2019.41.56%402x.png" title="CleanShot 2025-02-04 at 19.41.56@2x.png" width="1024" height="478"></figure><aside class="prompt" data-type="tip" data-title="" id="-6cojb9_28"><p id="-6cojb9_29">Il est possible d'aller &agrave; la ligne, tant que la commande n'est pas termin&eacute;e.</p></aside></section><section class="chapter"><h3 id="insertion-de-plusieurs-documents" data-toc="insertion-de-plusieurs-documents">Insertion de plusieurs documents</h3><div class="code-block" data-lang="mongodb">
+db.&lt;nom de la collection&gt;.insertMany(
+    [
+        {&lt;données&gt;},
+        {&lt;données&gt;}
+    ]
+ )
+</div><p id="-6cojb9_31">Exemple</p><div class="code-block" data-lang="mongodb">
+db.persons.insertMany(
+    [
+        {firstName: &quot;Ansel&quot;, name: &quot;Adams&quot;, job : &quot;Photographe&quot;},
+        {firstName: &quot;Dorothea&quot;, name: &quot;Lange&quot;, job : &quot;Photographe&quot;},
+        {firstName: &quot;Denis&quot;, name: &quot;Brihat&quot;, job : &quot;Photographe&quot;},
+        {firstName: &quot;Sabine&quot;, name: &quot;Weiss&quot;, job : &quot;Photographe&quot;},
+        {firstName: &quot;Niels&quot;, name: &quot;Bohr&quot;, job : &quot;Physicien&quot;},
+    ]
+ )
+</div><p id="-6cojb9_33">Une clef peut contenir un tableau ou un sous document</p><div class="code-block" data-lang="mongodb">
+db.persons.insertMany(
+    [
+        {   
+            firstName: &quot;Sophie&quot;, 
+            name: &quot;Adams&quot;, 
+            school: &quot;Ada's kids&quot;,
+            age: 32,
+            courses : [&quot;Java&quot;, &quot;Spring&quot;]   
+        },
+        {   
+            firstName: &quot;Paul&quot;, 
+            name: &quot;Adams&quot;, 
+            school: &quot;Ada's kids&quot;,
+            age: 28,
+            courses : [&quot;CSS&quot;, &quot;HTML&quot;],
+            address : {
+                street: &quot;232 rue des Pyrénées&quot;,
+                city: &quot;Paris&quot;,
+                zipCode: &quot;75020&quot;
+            }     
+        },
+        {   
+            firstName: &quot;Jean&quot;, 
+            name: &quot;Reynolds&quot;, 
+            school: &quot;Ada's kids&quot;,
+            age: 28,
+            courses : [&quot;Android&quot;, &quot;Java&quot;, &quot;HTML&quot;],
+            address : {
+                street: &quot;5 rue Orfila&quot;,
+                city: &quot;Paris&quot;,
+                zipCode: &quot;75020&quot;
+            }   
+        },   
+    ]
+ )
+</div></section><section class="chapter"><h3 id="a-vous" data-toc="a-vous">A vous</h3><ul class="list _bullet" id="-6cojb9_35"><li class="list__item" id="-6cojb9_36"><p>Ins&eacute;rer 3 nouvelles personnes dont une sans adresse</p></li></ul></section></section><section class="chapter"><h2 id="importation-de-documents" data-toc="importation-de-documents">Importation de documents</h2><p id="-6cojb9_37">MongoDB propose un outil d'importation de fichiers JSON dans une collection. Ce programme est Ind&eacute;pendant du Shell Mongo.</p><div class="code-block" data-lang="bash">
+docker exec -i &lt;container docker&gt; \
+       mongoimport \
+            --db &lt;base de données&gt; \
+            --collection &lt;nom de la collection&gt; \
+            --file &lt;chemin du fichier&gt; \
+            --jsonArray \
+            -u &lt;user&gt; -p &lt;mot de passe&gt; \
+            --authenticationDatabase admin
+</div><p id="-6cojb9_39">Si nous avons lanc&eacute; un container MongoDB sans authentification, nous pouvons nous passer des deux derni&egrave;res lignes.</p><section class="chapter"><h3 id="un-exemple" data-toc="un-exemple">Un exemple</h3><p id="-6cojb9_41">T&eacute;l&eacute;chargeons <a href="https://github.com/smaloron/mongodb-playground/blob/master/data/persons.json" id="-6cojb9_45" data-external="true" rel="noopener noreferrer">un fichier de personnes</a> et pla&ccedil;ons-le dans le dossier data de notre projet.</p><figure id="-6cojb9_42"><img alt="CleanShot 2025-02-09 at 15.25.57@2x.png" src="images/CleanShot%202025-02-09%20at%2015.25.57%402x.png" title="CleanShot 2025-02-09 at 15.25.57@2x.png" width="1372" height="1594"></figure><p id="-6cojb9_43">Ex&eacute;cutons ensuite l'import dans une base de donn&eacute;es <code class="code" id="-6cojb9_46">formation</code>, dans une collection <code class="code" id="-6cojb9_47">persons</code>.</p><div class="code-block" data-lang="bash">
+docker exec -i mongo-container \
+       mongoimport \
+            --db formation \
+            --collection persons \
+            --file /shared/persons.json \
+            --jsonArray \
+            -u admin -p 123 \
+            --authenticationDatabase admin
+</div></section></section><section class="chapter"><h2 id="s-lection-de-documents" data-toc="s-lection-de-documents">S&eacute;lection de documents</h2><p id="-6cojb9_48">MongoDB dispose de deux m&eacute;thodes, <code class="code" id="-6cojb9_58">find</code> qui retourne un tableau de documents et <code class="code" id="-6cojb9_59">findOne</code> qui n'en retourne qu'un.</p><p id="-6cojb9_49">Ces deux m&eacute;thodes admettent en argument un objet qui correspond aux crit&egrave;res de recherche.</p><section class="chapter"><h3 id="s-lectionner-selon-un-crit-re" data-toc="s-lectionner-selon-un-crit-re">S&eacute;lectionner selon un crit&egrave;re</h3><p id="-6cojb9_60">Il suffit d'indiquer la clef et la valeur recherch&eacute;e.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({firstName: 'Sophie'})
+</div><p id="-6cojb9_62">Pour rechercher sur la clef d'un sous document, il faut encadrer la clef et la sous clef par des guillemets.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({'address.city': 'Paris'})
+</div></section><section class="chapter"><h3 id="s-lectionner-selon-plusieurs-crit-res" data-toc="s-lectionner-selon-plusieurs-crit-res">S&eacute;lectionner selon plusieurs crit&egrave;res</h3><p id="-6cojb9_64">Il suffit de passer un objet contenant plusieurs clefs.</p><div class="code-block" data-lang="mongodb">
+db.persons.find({
+    firstName: 'Sophie',
+    'address.city': 'Paris'
+})
+</div></section><section class="chapter"><h3 id="compter-le-nombre-de-documents" data-toc="compter-le-nombre-de-documents">Compter le nombre de documents</h3><p id="-6cojb9_66">La fonction <code class="code" id="-6cojb9_68">countDocument</code> admet &eacute;galement un objet de crit&egrave;res, elle ne retourne que le nombre de documents qui correspondent &agrave; la recherche.</p><div class="code-block" data-lang="mongodb">
+db.persons.countDocuments({
+    'address.city': 'Paris'
+})
+</div></section><section class="chapter"><h3 id="obtenir-des-valeurs-distinctes" data-toc="obtenir-des-valeurs-distinctes">Obtenir des valeurs distinctes</h3><p id="-6cojb9_69">La fonction <code class="code" id="-6cojb9_75">distinct</code> retourne toutes les valeurs uniques d'une clef pass&eacute;e en argument</p><div class="code-block" data-lang="mongodb">
+db.persons.distinct('hobbies')
+</div><div class="code-block" data-lang="mongodb">
+db.persons.distinct('jobHistory.company')
+</div><p id="-6cojb9_72">Il est possible d'ajouter un objet de crit&egrave;res en second argument.</p><p id="-6cojb9_73">Ici les hobbies des habitants de Galway</p><div class="code-block" data-lang="mongodb">
+db.persons.distinct(
+    'hobbies', 
+    {'address.city': 'Galway'}
+)
+</div></section><section class="chapter"><h3 id="s-lectionner-les-clefs-retourner" data-toc="s-lectionner-les-clefs-retourner">S&eacute;lectionner les clefs &agrave; retourner</h3><p id="-6cojb9_76">En vocabulaire de base de donn&eacute;es, cette s&eacute;lection s'appelle une projection. Il faut passer un objet en deuxi&egrave;me argument de la fonction <code class="code" id="-6cojb9_79">find</code>.</p><div class="code-block" data-lang="mongodb">
+db.&lt;collection&gt;.find|findOne(
+    {&lt;critères},
+    {&lt;projection&gt;}
+)
+</div><section class="chapter"><h4 id="exemples" data-toc="exemples">Exemples</h4><p id="-6cojb9_80">Ne retourne que les clefs s&eacute;lectionn&eacute;es en plus de la clef <code class="code" id="-6cojb9_88">_id</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {},
+    {firstName: 1, lastName: 1}
+)
+</div><p id="-6cojb9_82">Retourne toutes les clefs sauf <code class="code" id="-6cojb9_89">computerSkills</code> et <code class="code" id="-6cojb9_90">jobHistory</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {},
+    {computerSkills: 0, jobHistory: 0}
+)
+</div><p id="-6cojb9_84">Ne retourne que les clefs s&eacute;lectionn&eacute;es sans la clef <code class="code" id="-6cojb9_91">_id</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {},
+    {firstName: 1, lastName: 1, _id: 0}
+)
+</div><p id="-6cojb9_86"><span class="control" id="-6cojb9_92">Observations</span></p><ul class="list _bullet" id="-6cojb9_87"><li class="list__item" id="-6cojb9_93"><p>1 ajoute la clef &agrave; la projection.</p></li><li class="list__item" id="-6cojb9_94"><p>0 retire la clef de la projection.</p></li><li class="list__item" id="-6cojb9_95"><p>Nous ne pouvons combiner inclusions et exclusions dans une m&ecirc;me projection sauf pour la clef <code class="code" id="-6cojb9_96">_id</code>.</p></li></ul></section></section><section class="chapter"><h3 id="trier-les-r-sulats" data-toc="trier-les-r-sulats">Trier les r&eacute;sulats</h3><p id="-6cojb9_97">La m&eacute;thode <code class="code" id="-6cojb9_106">sort()</code> permet d'ordonner les documents retourn&eacute;s par une requ&ecirc;te en fonction d'un ou plusieurs champs.</p><p id="-6cojb9_98">Trie les salaires par ordre croissant</p><div class="code-block" data-lang="mongodb">
+db.persons.find({}).sort({yearlyIncome: 1})
+</div><p id="-6cojb9_100">Trie les salaires par ordre d&eacute;croissant</p><div class="code-block" data-lang="mongodb">
+db.persons.find({}).sort({yearlyIncome: -1})
+</div><p id="-6cojb9_102">Trie par ordre croissant de code postal</p><div class="code-block" data-lang="mongodb">
+db.persons.find({}).sort({'address.zipCode': 1})
+</div><p id="-6cojb9_104">Trie par ordre croissant de nom de famille et de pr&eacute;nom</p><div class="code-block" data-lang="mongodb">
+db.persons.find({}).sort({lastName: 1, firstName: 1})
+</div></section><section class="chapter"><h3 id="limiter-les-r-sultats" data-toc="limiter-les-r-sultats">Limiter les r&eacute;sultats</h3><p id="-6cojb9_107">Il est &eacute;galement possible de limiter le nombre de documents retourn&eacute;s.</p><p id="-6cojb9_108">Limite la recherche aux trois premiers r&eacute;sultats</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {},
+    {firstName: 1, lastName: 1, _id: 0}
+).limit(3)
+</div><p id="-6cojb9_110">Limite la recherche &agrave; trois r&eacute;sultats en ignorant les cinq premiers</p><div class="code-block" data-lang="mongodb">
+db.persons.find(
+    {},
+    {firstName: 1, lastName: 1, _id: 0}
+).limit(3).skip(5)
+</div></section><section class="chapter"><h3 id="a-vous_1" data-toc="a-vous_1">A vous</h3><ul class="list _bullet" id="-6cojb9_112"><li class="list__item" id="-6cojb9_113"><p>Obtenir le nombre de personnes qui habitent &agrave; Lyon.</p></li><li class="list__item" id="-6cojb9_114"><p>Obtenir les personnes qui travaillent ou ont travaill&eacute; pour IBM.</p></li><li class="list__item" id="-6cojb9_115"><p>Obtenir les personnes qui connaissent Java.</p></li><li class="list__item" id="-6cojb9_116"><p>Obtenir la liste des hobbies pratiqu&eacute;s par les femmes irlandaises.</p></li></ul></section></section><section class="chapter"><h2 id="suppression-de-documents" data-toc="suppression-de-documents">Suppression de documents</h2><p id="-6cojb9_117">Comme pour l'insertion, nous disposons de deux m&eacute;thodes selon que nous souhaitons supprimer un seul document ou bien une s&eacute;rie de documents.</p><section class="chapter"><h3 id="suppression-d-un-document" data-toc="suppression-d-un-document">Suppression d'un document</h3><div class="code-block" data-lang="mongodb">
+db.nom_de_la_collection.deleteOne({ &lt;critères&gt; });
+</div><p id="-6cojb9_122"><span class="control" id="-6cojb9_132">Exemple</span></p><div class="code-block" data-lang="mongodb">
+db.persons.deleteOne({
+    firstName: &quot;Ansel&quot;,
+    lastName: &quot;Adams&quot;
+})
+</div><figure id="-6cojb9_124"><img alt="CleanShot 2025-02-09 at 08.02.31@2x.png" src="images/CleanShot%202025-02-09%20at%2008.02.31%402x.png" title="CleanShot 2025-02-09 at 08.02.31@2x.png" width="786" height="268"></figure><p id="-6cojb9_125"><span class="control" id="-6cojb9_133">Aucune erreur, mais &ccedil;a ne marche pas (deleteCount: 0)</span></p><p id="-6cojb9_126">Avec <code class="code" id="-6cojb9_134">db.persons.find({})</code>, nous constatons que la clef <code class="code" id="-6cojb9_135">firstName</code> n'existe pas, il faut utiliser <code class="code" id="-6cojb9_136">name</code>.</p><div class="code-block" data-lang="mongodb">
+db.persons.deleteOne({
+    firstName: &quot;Ansel&quot;,
+    name: &quot;Adams&quot;
+})
+</div><figure id="-6cojb9_128"><img alt="CleanShot 2025-02-09 at 08.08.26@2x.png" src="images/CleanShot%202025-02-09%20at%2008.08.26%402x.png" title="CleanShot 2025-02-09 at 08.08.26@2x.png" width="782" height="256"></figure><p id="-6cojb9_129">On voit ici les limites de la permissivit&eacute; de MongoDB et l'importance de lire les messages &agrave; la console.</p><section class="chapter"><h4 id="les-id" data-toc="les-id">Les ID</h4><p id="-6cojb9_137">MongoDB utilise un hash pour identifier les documents, l'&eacute;quivalent de la clef primaire dans le monde relationnel.</p><p id="-6cojb9_138">Toutefois, pour utiliser cet identifiant il nous faut construire un <code class="code" id="-6cojb9_143">ObjectId</code> &agrave; partir du hash.</p><p id="-6cojb9_139">Nous constatons avec un <code class="code" id="-6cojb9_144">db.persons.find({})</code> que nos documents poss&egrave;dent tous une clef <code class="code" id="-6cojb9_145">_id</code>contenant le fameux <code class="code" id="-6cojb9_146">ObjectId</code>.</p><figure id="-6cojb9_140"><img alt="CleanShot 2025-02-09 at 08.11.10@2x.png" src="images/CleanShot%202025-02-09%20at%2008.11.10%402x.png" title="CleanShot 2025-02-09 at 08.11.10@2x.png" width="1072" height="634"></figure><p id="-6cojb9_141">Nous pouvons donc identifier un document de fa&ccedil;on unique pour la suppression, la mise &agrave; jour et la s&eacute;lection.</p><div class="code-block" data-lang="mongodb">
+db.persons.deleteOne({
+    _id: ObjectId('67a852b37664e44ffbfc0421'),
+})
+</div></section><section class="chapter"><h4 id="conclusions" data-toc="conclusions">Conclusions</h4><ul class="list _bullet" id="-6cojb9_147"><li class="list__item" id="-6cojb9_148"><p>deleteOne supprime un document.</p></li><li class="list__item" id="-6cojb9_149"><p>deleteOne admet en argument un objet json contenant les crit&egrave;res de suppression.</p></li><li class="list__item" id="-6cojb9_150"><p>ObjectId identifie de fa&ccedil;on unique un document.</p></li><li class="list__item" id="-6cojb9_151"><p>Si les crit&egrave;res retournent plus d'un document seul le premier trouv&eacute; sera supprim&eacute;.</p></li></ul></section></section><section class="chapter"><h3 id="suppression-de-plusieurs-documents" data-toc="suppression-de-plusieurs-documents">Suppression de plusieurs documents</h3><p id="-6cojb9_152">La commande <code class="code" id="-6cojb9_156">deleteMany</code> fonctionne comme <code class="code" id="-6cojb9_157">deleteOne</code> mais elle supprime tous les documents cibl&eacute;s par les crit&egrave;res.</p><div class="code-block" data-lang="mongodb">
+db.persons.deleteMany({
+    job: 'Photographe',
+})
+</div><p id="-6cojb9_154">Il est &eacute;galement possible d'acc&egrave;der aux sous documents, mais dans ce cas, il faudra encadrer le champ par des guillemets.</p><div class="code-block" data-lang="mongodb">
+db.persons.deleteMany({
+    'address.city': 'Paris',
+})
+</div></section><section class="chapter"><h3 id="suppression-de-tous-les-documents" data-toc="suppression-de-tous-les-documents">Suppression de tous les documents</h3><div class="code-block" data-lang="mongodb">
+db.persons.deleteMany({})
+</div></section></section><section class="chapter"><h2 id="mise-jour-de-documents" data-toc="mise-jour-de-documents">Mise &agrave; jour de documents</h2><section class="chapter"><h3 id="mettre-jour-un-seul-document" data-toc="mettre-jour-un-seul-document">Mettre &agrave; jour un seul document</h3><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id: ObjectId(&quot;652a7d3f8b9b9f1a9f4e77b2&quot;) }, 
+   { $set: { age: 30 } }
+);
+</div><ul class="list _bullet" id="-6cojb9_170"><li class="list__item" id="-6cojb9_171"><p>Le premier argument est un objet qui indique les crit&egrave;res de recherche.</p></li><li class="list__item" id="-6cojb9_172"><p>Le second argument est un objet qui contient un op&eacute;rateur <code class="code" id="-6cojb9_174">$set</code> qui lui-m&ecirc;me contient un objet avec les modifications souhait&eacute;es.</p></li><li class="list__item" id="-6cojb9_173"><p>Si une clef n'existe pas, elle est ajout&eacute;e, sinon sa valeur est modifi&eacute;e.</p></li></ul></section><section class="chapter"><h3 id="mettre-jour-plusieurs-documents" data-toc="mettre-jour-plusieurs-documents">Mettre &agrave; jour plusieurs documents</h3><div class="code-block" data-lang="mongodb">
+db.persons.updateMany(
+   { school: &quot;Ada's kids&quot; }, 
+   { $set: { city: 'Orléans' } }
+);
+</div></section><section class="chapter"><h3 id="remplacer-un-document" data-toc="remplacer-un-document">Remplacer un document</h3><p id="-6cojb9_176">Remplace l'int&eacute;gralit&eacute; d'un document, les anciennes valeurs sont toutes supprim&eacute;es.</p><div class="code-block" data-lang="mongodb">
+db.persons.replaceOne(
+   { _id: ObjectId(&quot;652a7d3f8b9b9f1a9f4e77b2&quot;) },
+   { 
+    firstName: &quot;Albert&quot;
+    name: &quot;Dupont&quot;, 
+    age: 40, 
+    address: { 
+        city: &quot;Lyon&quot;, 
+        country: &quot;France&quot; 
+    } 
+})
+</div></section><section class="chapter"><h3 id="supprimer-une-clef-dans-un-document" data-toc="supprimer-une-clef-dans-un-document">Supprimer une clef dans un document</h3><div class="code-block" data-lang="mongodb">
+db.&lt;nom_de_la_collection&gt;.updateOne(
+   { &lt;critère&gt; }, 
+   { $unset: { &lt;clef&gt;: &quot;&quot; } }
+);
+</div><p id="-6cojb9_179">Par exemple ici, nous supprimons les hobbies</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id: ObjectId('67a8efaf04d902140fb36e19') }, 
+   { $unset: { hobbies: &quot;&quot; } }
+);
+</div></section><section class="chapter"><h3 id="incr-menter-une-valeur" data-toc="incr-menter-une-valeur">Incr&eacute;menter une valeur</h3><div class="code-block" data-lang="mongodb">
+db.&lt;nom_de_la_collection&gt;.updateOne(
+   { &lt;critère&gt; }, 
+   { $inc: { &lt;clef&gt;: valeur } }
+);
+</div><p id="-6cojb9_182">Par exemple ici, nous augmentons le salaire annuel de 1000.</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id: ObjectId('67a8efaf04d902140fb36e19') }, 
+   { $inc: { yearlyIncome: 1000 } }
+);
+</div><aside class="prompt" data-type="tip" data-title="" id="-6cojb9_184"><p id="-6cojb9_187">Pour d&eacute;cr&eacute;menter, il suffit d'utiliser une valeur n&eacute;gative.</p></aside><p id="-6cojb9_185">Augmente toutes les femmes</p><div class="code-block" data-lang="mongodb">
+db.persons.updateMany(
+   { gender: 'femme' }, 
+   { $inc: { yearlyIncome: 1000 } }
+);
+</div></section><section class="chapter"><h3 id="mettre-jour-une-clef-dans-un-sous-document" data-toc="mettre-jour-une-clef-dans-un-sous-document">Mettre &agrave; jour une clef dans un sous document</h3><p id="-6cojb9_188">Il suffit d'encadrer la clef par des guillemets</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id: ObjectId('652a7d3f8b9b9f1a9f4e77b2') }, 
+   { $set: 
+        { 
+            'address.city': 'Lyon',
+            'address.zipCode': '69001'
+        } 
+    }
+);
+</div></section><section class="chapter"><h3 id="ajouter-un-l-ment-un-tableau" data-toc="ajouter-un-l-ment-un-tableau">Ajouter un &eacute;l&eacute;ment &agrave; un tableau</h3><p id="-6cojb9_190">Ajout d'une valeur scalaire</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id:  ObjectId('67a913ea9c516e055a2574ed') },
+   { $push: { hobbies: 'dessin' } }
+);
+</div><p id="-6cojb9_192">Ajout dans un tableau de documents</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id:  ObjectId('67a913ea9c516e055a2574ed') },
+   { $push: { jobHistory: 
+        {
+            joinedAt: 2015,
+            jobTitle: 'Waitress',
+            company: 'Starbuck',
+            leftAt: 2017
+        } 
+     } 
+   }
+);
+</div></section><section class="chapter"><h3 id="supprimer-un-l-ment-dans-un-tableau" data-toc="supprimer-un-l-ment-dans-un-tableau">Supprimer un &eacute;l&eacute;ment dans un tableau</h3><p id="-6cojb9_194">Supprime le hobby Lecture</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id:  ObjectId('67a913ea9c516e055a2574ed') },
+   { $pull: { hobbies: 'Lecture' } }
+);
+</div><p id="-6cojb9_196">Supprime toutes les exp&eacute;riences professionnelles chez Starbuck</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+   { _id:  ObjectId('67a913ea9c516e055a2574ed') },
+   { $pull: 
+     { 
+        jobHistory: {company: 'Starbuck'} 
+     } 
+   }
+);
+</div></section><section class="chapter"><h3 id="supprimer-le-premier-ou-le-dernier-l-ment-d-un-tableau" data-toc="supprimer-le-premier-ou-le-dernier-l-ment-d-un-tableau">Supprimer le premier ou le dernier &eacute;l&eacute;ment d'un tableau</h3><p id="-6cojb9_198">Supprime la derni&egrave;re exp&eacute;rience de Sophie Martin.</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+  { &quot;firstName&quot;: &quot;Sophie&quot;, &quot;lastName&quot;: &quot;Martin&quot; },
+  { &quot;$pop&quot;: { &quot;jobHistory&quot;: 1 } }
+)
+</div><ul class="list _bullet" id="-6cojb9_200"><li class="list__item" id="-6cojb9_201"><p>1 supprime le dernier &eacute;lement du tableau.</p></li><li class="list__item" id="-6cojb9_202"><p>-1 supprime le premier &eacute;l&eacute;ment.</p></li></ul></section><section class="chapter"><h3 id="ajoute-un-l-ment-en-vitant-les-doublons" data-toc="ajoute-un-l-ment-en-vitant-les-doublons">Ajoute un &eacute;l&eacute;ment en &eacute;vitant les doublons</h3><p id="-6cojb9_203">Ajoute la comp&eacute;tence Python uniquement si elle n'est pas d&eacute;j&agrave; pr&eacute;sente.</p><div class="code-block" data-lang="mongodb">
+db.persons.updateOne(
+  { &quot;firstName&quot;: &quot;Jean&quot;, &quot;lastName&quot;: &quot;Dupont&quot; },
+  { &quot;$addToSet&quot;: { &quot;computerSkills&quot;: &quot;Python&quot; } }
+)
+</div></section></section><section class="chapter"><h2 id="exercice" data-toc="exercice">Exercice</h2><section class="chapter"><h3 id="cr-ation" data-toc="cr-ation">Cr&eacute;ation</h3><p id="-6cojb9_208">Cr&eacute;er une collection de films contenant les clefs suivantes :</p><ul class="list _bullet" id="-6cojb9_209"><li class="list__item" id="-6cojb9_211"><p>title</p></li><li class="list__item" id="-6cojb9_212"><p>releaseYear</p></li><li class="list__item" id="-6cojb9_213"><p>actors (un tableau des acteurs principaux)</p></li><li class="list__item" id="-6cojb9_214"><p>genre</p></li></ul><p id="-6cojb9_210">Ins&eacute;rer 5 films et faire les requ&ecirc;tes suivantes :</p></section><section class="chapter"><h3 id="requ-tes" data-toc="requ-tes">Requ&ecirc;tes</h3><ul class="list _bullet" id="-6cojb9_215"><li class="list__item" id="-6cojb9_216"><p>Les films d'un genre donn&eacute;</p></li><li class="list__item" id="-6cojb9_217"><p>Les films dans lesquels joue un acteur donn&eacute;</p></li></ul></section><section class="chapter"><h3 id="modifications" data-toc="modifications">Modifications</h3><ul class="list _bullet" id="-6cojb9_218"><li class="list__item" id="-6cojb9_219"><p>Ajouter un acteur &agrave; un film</p></li><li class="list__item" id="-6cojb9_220"><p>Supprimer un acteur dans un film</p></li><li class="list__item" id="-6cojb9_221"><p>Changer le genre d'un film</p></li></ul></section></section><div class="last-modified">Last modified: 23 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="001-00-mongodb.html" class="navigation-links__prev">MongoDB</a><a href="002-00-selections-avancees.html" class="navigation-links__next">S&eacute;lections avanc&eacute;es</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>

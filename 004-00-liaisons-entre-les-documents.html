@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-23T18:21:36.480438"><title>Liaisons entre les documents | mongodb</title><script type="application/json" id="virtual-toc-data">[{"id":"l-imbrication-de-documents-embedded-documents","level":0,"title":"L’imbrication de documents (Embedded Documents)","anchor":"#l-imbrication-de-documents-embedded-documents"},{"id":"r-f-rences-inter-collections","level":0,"title":"Références inter-collections","anchor":"#r-f-rences-inter-collections"},{"id":"quelle-m-thode-choisir","level":0,"title":"Quelle méthode choisir ?","anchor":"#quelle-m-thode-choisir"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Liaisons entre les documents | mongodb"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="mongodb Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/004-00-liaisons-entre-les-documents.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Liaisons entre les documents | mongodb"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/004-00-liaisons-entre-les-documents.html#webpage",
+    "url": "writerside-documentation/004-00-liaisons-entre-les-documents.html",
+    "name": "Liaisons entre les documents | mongodb",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "mongodb Help"
+}</script><!-- End Schema.org --></head><body data-id="004-00-Liaisons-entre-les-documents" data-main-title="Liaisons entre les documents" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>mongodb  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="004-00-Liaisons-entre-les-documents" id="004-00-Liaisons-entre-les-documents.md">Liaisons entre les documents</h1><p id="-j1ivi3_3">En MongoDB, la liaison entre les documents se fait g&eacute;n&eacute;ralement de deux mani&egrave;res : les r&eacute;f&eacute;rences (manual references ou DBRefs) et l&rsquo;imbrication (embedded documents). Le choix entre ces deux d&eacute;pend du mod&egrave;le de donn&eacute;es et des besoins de performance.</p><section class="chapter"><h2 id="l-imbrication-de-documents-embedded-documents" data-toc="l-imbrication-de-documents-embedded-documents">L&rsquo;imbrication de documents (Embedded Documents)</h2><p id="-j1ivi3_7">Cette m&eacute;thode consiste &agrave; stocker directement un document dans un autre document. Elle est id&eacute;ale pour les relations &quot;un &agrave; plusieurs&quot; o&ugrave; les donn&eacute;es sont fr&eacute;quemment consult&eacute;es ensemble.</p><section class="chapter"><h3 id="avantages" data-toc="avantages">✅ <span class="control" id="-j1ivi3_12">Avantages :</span></h3><ul class="list _bullet" id="-j1ivi3_11"><li class="list__item" id="-j1ivi3_13"><p>Moins de requ&ecirc;tes, donc plus rapide.</p></li><li class="list__item" id="-j1ivi3_14"><p>Pas besoin de jointures complexes.</p></li><li class="list__item" id="-j1ivi3_15"><p>Donn&eacute;es coh&eacute;rentes et imm&eacute;diatement accessibles.</p></li></ul></section><section class="chapter"><h3 id="inconv-nients" data-toc="inconv-nients">❌ <span class="control" id="-j1ivi3_22">Inconv&eacute;nients :</span></h3><ul class="list _bullet" id="-j1ivi3_17"><li class="list__item" id="-j1ivi3_23"><p>Taille de document limit&eacute;e (16 Mo).</p></li><li class="list__item" id="-j1ivi3_24"><p>Peut entra&icirc;ner de la duplication et une mise &agrave; jour plus compliqu&eacute;e.</p></li></ul><p id="-j1ivi3_18">Exemple :</p><div class="code-block" data-lang="mongodb">
+{
+  &quot;_id&quot;: 1,
+  &quot;nom&quot;: &quot;Alice&quot;,
+  &quot;email&quot;: &quot;alice@example.com&quot;,
+  &quot;adresses&quot;: [
+    {
+      &quot;rue&quot;: &quot;123 Rue Principale&quot;,
+      &quot;ville&quot;: &quot;Paris&quot;,
+      &quot;code_postal&quot;: &quot;75001&quot;
+    },
+    {
+      &quot;rue&quot;: &quot;456 Avenue Centrale&quot;,
+      &quot;ville&quot;: &quot;Lyon&quot;,
+      &quot;code_postal&quot;: &quot;69002&quot;
+    }
+  ]
+}
+</div><p id="-j1ivi3_20">ou encore</p><div class="code-block" data-lang="mongodb">
+{
+  &quot;_id&quot;: ObjectId(&quot;1234567890abcdef12345678&quot;),
+  &quot;titre&quot;: &quot;Les Misérables&quot;,
+  &quot;année&quot;: 1862,
+  &quot;auteur&quot;: {
+    &quot;nom&quot;: &quot;Victor Hugo&quot;,
+    &quot;nationalité&quot;: &quot;Française&quot;
+  }
+}
+</div></section></section><section class="chapter"><h2 id="r-f-rences-inter-collections" data-toc="r-f-rences-inter-collections">R&eacute;f&eacute;rences inter-collections</h2><p id="-j1ivi3_25">Si la redondance devient probl&eacute;matique ou que le nombre de sous documents d&eacute;passe un certain seuil, il est pr&eacute;f&eacute;rable de cr&eacute;er des collections s&eacute;par&eacute;es et de lier ses collections par le biais de r&eacute;f&eacute;rences. Bien qu'il ne soit pas question ici de cl&eacute; &eacute;trang&egrave;re. Le principe est tr&egrave;s similaire &agrave; ce que nous connaissons dans le monde relationnel.</p><p id="-j1ivi3_26">Dans l'exemple ci-dessous, nous avons une collection <code class="code" id="-j1ivi3_30">authors</code> et une collection <code class="code" id="-j1ivi3_31">books</code> qui r&eacute;f&eacute;rence la clef <code class="code" id="-j1ivi3_32">_id</code> de <code class="code" id="-j1ivi3_33">authors</code> dans une clef <code class="code" id="-j1ivi3_34">author_id</code>.</p><div class="code-block" data-lang="mongodb">
+{
+  &quot;_id&quot;: ObjectId(&quot;65123abc456def7890123456&quot;),
+  &quot;name&quot;: &quot;Victor Hugo&quot;,
+  &quot;nationality&quot;: &quot;Française&quot;
+}
+</div><div class="code-block" data-lang="mongodb">
+{
+  &quot;_id&quot;: ObjectId(&quot;1234567890abcdef12345678&quot;),
+  &quot;title&quot;: &quot;Les Misérables&quot;,
+  &quot;author_id&quot;: ObjectId(&quot;65123abc456def7890123456&quot;),
+  &quot;publishedAt&quot;: 1862
+}
+</div><section class="chapter"><h3 id="requ-te-de-jointure" data-toc="requ-te-de-jointure">Requ&ecirc;te de jointure</h3><p id="-j1ivi3_35">Voici l'&eacute;quivalent d'une jointure avec MongoDB.</p><div class="code-block" data-lang="mongodb">
+db.livres.aggregate([
+  {
+    &quot;$lookup&quot;: {
+      &quot;from&quot;: &quot;auteurs&quot;,
+      &quot;localField&quot;: &quot;auteur_id&quot;,
+      &quot;foreignField&quot;: &quot;_id&quot;,
+      &quot;as&quot;: &quot;auteur&quot;
+    }
+  },
+  {
+    &quot;$unwind&quot;: &quot;$auteur&quot;
+  }
+])
+</div></section></section><section class="chapter"><h2 id="quelle-m-thode-choisir" data-toc="quelle-m-thode-choisir">Quelle m&eacute;thode choisir ?</h2><div class="table-wrapper"><table class="wide" id="-j1ivi3_37"><thead><tr class="ijRowHead" id="-j1ivi3_40"><th id="-j1ivi3_45"><p>Crit&egrave;re</p></th><th id="-j1ivi3_46"><p>R&eacute;f&eacute;rencement (<code class="code" id="-j1ivi3_48">$lookup</code>)</p></th><th id="-j1ivi3_47"><p>Imbrication (Embeddage)</p></th></tr></thead><tbody><tr id="-j1ivi3_41"><td id="-j1ivi3_49"><p>🔄 Fr&eacute;quence des mises &agrave; jour</p></td><td id="-j1ivi3_50"><p>&Eacute;lev&eacute;e</p></td><td id="-j1ivi3_51"><p>Faible</p></td></tr><tr id="-j1ivi3_42"><td id="-j1ivi3_52"><p>📚 Nombre de relations</p></td><td id="-j1ivi3_53"><p>&quot;Un-&agrave;-plusieurs&quot; ou &quot;Plusieurs-&agrave;-plusieurs&quot;</p></td><td id="-j1ivi3_54"><p>&quot;Un-&agrave;-few&quot;</p></td></tr><tr id="-j1ivi3_43"><td id="-j1ivi3_55"><p>Performances</p></td><td id="-j1ivi3_56"><p>Plus lent (requ&ecirc;te avec <code class="code" id="-j1ivi3_58">$lookup</code>)</p></td><td id="-j1ivi3_57"><p>Plus rapide (lecture unique)</p></td></tr><tr id="-j1ivi3_44"><td id="-j1ivi3_59"><p>Complexit&eacute; de la structure</p></td><td id="-j1ivi3_60"><p>Plus modulaire</p></td><td id="-j1ivi3_61"><p>Plus simple</p></td></tr></tbody></table></div><section class="chapter"><h3 id="les-questions-se-poser" data-toc="les-questions-se-poser">Les questions &agrave; se poser</h3><ul class="list _bullet" id="-j1ivi3_62"><li class="list__item" id="-j1ivi3_64"><p><span class="control" id="-j1ivi3_68">Volum&eacute;trie</span>, l'ordre de grandeur du nombre de documents li&eacute;s.</p></li><li class="list__item" id="-j1ivi3_65"><p><span class="control" id="-j1ivi3_69">Fr&eacute;quence de mise &agrave; jour</span>.</p></li><li class="list__item" id="-j1ivi3_66"><p><span class="control" id="-j1ivi3_70">Partage</span>, le document peut-il &ecirc;tre potentiellement li&eacute; &agrave; combien d'autres documents ?</p></li><li class="list__item" id="-j1ivi3_67"><p><span class="control" id="-j1ivi3_71">Ind&eacute;pendance</span>, est-il possible d'avoir &agrave; requ&ecirc;ter sur le document li&eacute; ind&eacute;pendamment de son parent.</p></li></ul><p id="-j1ivi3_63">Comme souvent en conception de structure de donn&eacute;es, il n'y a pas de bonne r&eacute;ponse absolue. La solution d&eacute;pend du contexte, des fonctionnalit&eacute;s et des traitements que l'application doit fournir.</p></section><section class="chapter"><h3 id="petit-d-fi" data-toc="petit-d-fi">Petit d&eacute;fi</h3><p id="-j1ivi3_72">Pour les situations qui suivent, arbitrer entre imbrication et r&eacute;f&eacute;rencement, motiver le choix.</p><ul class="list _bullet" id="-j1ivi3_73"><li class="list__item" id="-j1ivi3_74"><p>Un &eacute;l&egrave;ve et ses devoirs (mati&egrave;re, note et date).</p></li><li class="list__item" id="-j1ivi3_75"><p>Une commande et son client.</p></li><li class="list__item" id="-j1ivi3_76"><p>Une commande et ses produits</p></li><li class="list__item" id="-j1ivi3_77"><p>Une recette et ses ingr&eacute;dients</p></li><li class="list__item" id="-j1ivi3_78"><p>Un vol et ses escales</p></li><li class="list__item" id="-j1ivi3_79"><p>Une personne et son adresse</p></li></ul></section></section><div class="last-modified">Last modified: 23 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="003-00-regex.html" class="navigation-links__prev">Expressions r&eacute;guli&egrave;res</a><a href="005-00-agregation.html" class="navigation-links__next">Agr&eacute;gation</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>

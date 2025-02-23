@@ -1,0 +1,231 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-02-23T18:21:36.480437"><title>Optimisation | mongodb</title><script type="application/json" id="virtual-toc-data">[{"id":"indexation","level":0,"title":"Indexation","anchor":"#indexation"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Optimisation | mongodb"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="mongodb Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/006-00-optimisation.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Optimisation | mongodb"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/006-00-optimisation.html#webpage",
+    "url": "writerside-documentation/006-00-optimisation.html",
+    "name": "Optimisation | mongodb",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "mongodb Help"
+}</script><!-- End Schema.org --></head><body data-id="006-00-Optimisation" data-main-title="Optimisation" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>mongodb  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="006-00-Optimisation" id="006-00-Optimisation.md">Optimisation</h1><section class="chapter"><h2 id="indexation" data-toc="indexation">Indexation</h2><p id="-wxqg4i_4">L'indexation est sans doute la m&eacute;thode la plus efficace pour am&eacute;liorer la performance des requ&ecirc;tes. Cependant l'utilisation des index ralentira les insertions et les mises &agrave; jour et augmentera la taille de la base de donn&eacute;es.</p><p id="-wxqg4i_5">Il ne faut donc d&eacute;finir des index que sur les champs qui seront effectivement utilis&eacute;s dans les recherches, les tris, les liaisons ou les regroupements.</p><section class="chapter"><h3 id="fonctionnement-des-index" data-toc="fonctionnement-des-index">Fonctionnement des index</h3><p id="-wxqg4i_14">La recherche par index se base sur une table d'indexation qui r&eacute;f&eacute;rence toutes les valeurs d'une clef et associe les documents correspondants. La table d'index est tri&eacute;e en ordre croissant ou d&eacute;croissant.</p><p id="-wxqg4i_15">Dans l'exemple ci-dessous, sans index pour rechercher tous les documents qui portent le nom Gramont, il faudra parcourir toute la table. En effet, la collection n'&eacute;tant pas tri&eacute;e sur la cl&eacute;, nom, nous ne pouvons savoir avec certitude que nous avons obtenu tous les documents voulus avant d'arriver &agrave; la fin de la table.</p><p id="-wxqg4i_16">Avec un index, le parcours est bien plus rapide, car l'index &eacute;tant tri&eacute;, mongoDB, peut utiliser un algorithme de recherche dichotomique, bien plus performant que le parcours de l'ensemble de la collection.</p><p id="-wxqg4i_17">Cependant, lors des insertions des mises &agrave; jour et m&ecirc;me des suppressions. Il faudra &eacute;galement modifier cette table d'indexation, ce qui aura un impact sur la performance. En outre, il faut bien s&ucirc;r stocker ces informations sur le disque dur et en m&eacute;moire, vive ce qui augmente le poids de la base de donn&eacute;es.</p><figure id="-wxqg4i_18"><img alt="CleanShot 2025-02-12 at 16.56.03@2x.png" src="images/CleanShot%202025-02-12%20at%2016.56.03%402x.png" title="CleanShot 2025-02-12 at 16.56.03@2x.png" width="928" height="714"></figure></section><section class="chapter"><h3 id="test-de-performance" data-toc="test-de-performance">Test de performance</h3><p id="-wxqg4i_19">Nous ajoutons une collection contenant 5000 documents.</p><p id="-wxqg4i_20">l'ensemble des fichiers du projet se trouvent <a href="https://github.com/smaloron/mongodb-playground" id="-wxqg4i_24" data-external="true" rel="noopener noreferrer">ici</a></p><div class="code-block" data-lang="bash">
+docker exec -i mongo-container mongoimport \
+    -p 123 -u admin \
+    --db formation \
+    --collection randomusers \
+    --file /shared/random_users.me_5000.json \
+    --jsonArray \
+    --authenticationDatabase admin
+</div><section class="chapter"><h4 id="requ-te-sans-index" data-toc="requ-te-sans-index">Requ&ecirc;te sans index</h4><p id="-wxqg4i_25">Ex&eacute;cutons cette requ&ecirc;te dans un terminal. La fonction explain nous donnera des d&eacute;tails sur la fa&ccedil;on dont MongoDB ex&eacute;cute notre instruction.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.find({gender: 'male'})
+              .explain('executionStats')
+</div><p id="-wxqg4i_27"><span class="control" id="-wxqg4i_30">Notons quelques points :</span></p><ul class="list _bullet" id="-wxqg4i_28"><li class="list__item" id="-wxqg4i_31"><p><code class="code" id="-wxqg4i_33">WinningPlan.stage:'COLLSCAN'</code>: cela indique que MongoDB a r&eacute;alis&eacute; un parcours complet de la collection.</p></li><li class="list__item" id="-wxqg4i_32"><p><code class="code" id="-wxqg4i_34">totalDocsExamined: 5000</code>: voil&agrave; qui confirme la premi&egrave;re information.</p></li></ul><div class="code-block" data-lang="bash">
+formation&gt; db.randomusers.find({gender: 'male'}).explain('executionStats')
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'formation.randomusers',
+    parsedQuery: { gender: { '$eq': 'male' } },
+    indexFilterSet: false,
+    queryHash: '2FC37AE0',
+    planCacheKey: '2240FDC0',
+    optimizationTimeMillis: 0,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: { gender: { '$eq': 'male' } },
+      direction: 'forward'
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 2452,
+    executionTimeMillis: 2,
+    totalKeysExamined: 0,
+    totalDocsExamined: 5000,
+    executionStages: {
+      isCached: false,
+      stage: 'COLLSCAN',
+      filter: { gender: { '$eq': 'male' } },
+      nReturned: 2452,
+      executionTimeMillisEstimate: 0,
+      works: 5001,
+      advanced: 2452,
+      needTime: 2548,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      direction: 'forward',
+      docsExamined: 5000
+    }
+  },
+  command: {
+    find: 'randomusers',
+    filter: { gender: 'male' },
+    '$db': 'formation'
+  },
+  serverInfo: {
+    host: 'b42a0b2f8d25',
+    port: 27017,
+    version: '8.0.3',
+    gitVersion: '89d97f2744a2b9851ddfb51bdf22f687562d9b06'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+</div></section><section class="chapter"><h4 id="requ-te-avec-un-index" data-toc="requ-te-avec-un-index">Requ&ecirc;te avec un index</h4><p id="-wxqg4i_35">Commen&ccedil;ons par cr&eacute;er un index, la valeur 1 indique un ordre croissant, pour un ordre d&eacute;croissant on utilise -1.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.createIndex({gender: 1})
+</div><p id="-wxqg4i_37">Puis ex&eacute;cutons &agrave; nouveau la requ&ecirc;te.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.find({gender: 'male'})
+              .explain('executionStats')
+</div><p id="-wxqg4i_39"><span class="control" id="-wxqg4i_45">Observations</span></p><ul class="list _bullet" id="-wxqg4i_40"><li class="list__item" id="-wxqg4i_46"><p><code class="code" id="-wxqg4i_49">stage: 'IXSCAN'</code></p></li><li class="list__item" id="-wxqg4i_47"><p><code class="code" id="-wxqg4i_50">indexName: 'gender_1'</code></p></li><li class="list__item" id="-wxqg4i_48"><p><code class="code" id="-wxqg4i_51">totalDocsExamined: 2452</code></p></li></ul><p id="-wxqg4i_41">Nous avons divis&eacute; par deux le nombre de documents scann&eacute;s. Nous sommes ici sur une information qui ne poss&egrave;de que peu de valeurs diff&eacute;rentes, le gain serait bien sup&eacute;rieur avec un nom ou un pr&eacute;nom par exemple.</p><p id="-wxqg4i_42">Le cas le plus favorable est quand toutes les valeurs sont uniques. Plus la valeur recherch&eacute;e est fr&eacute;quente et moins l'index est efficace.</p><p id="-wxqg4i_43">Il peut m&ecirc;me arriver qu'une requ&ecirc;te sur un index soit plus lente que sans index. Dans le cas o&ugrave; la requ&ecirc;te retourne la majorit&eacute; des documents de la collection, l'&eacute;tape suppl&eacute;mentaire du parcours des index peut affecter n&eacute;gativement la performance.</p><div class="code-block" data-lang="bash">
+formation&gt; db.randomusers.find({gender: 'male'}).explain('executionStats')
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'formation.randomusers',
+    parsedQuery: { gender: { '$eq': 'male' } },
+    indexFilterSet: false,
+    queryHash: '2FC37AE0',
+    planCacheKey: '354E5737',
+    optimizationTimeMillis: 0,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { gender: 1 },
+        indexName: 'gender_1',
+        isMultiKey: false,
+        multiKeyPaths: { gender: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { gender: [ '[&quot;male&quot;, &quot;male&quot;]' ] }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 2452,
+    executionTimeMillis: 2,
+    totalKeysExamined: 2452,
+    totalDocsExamined: 2452,
+    executionStages: {
+      isCached: false,
+      stage: 'FETCH',
+      nReturned: 2452,
+      executionTimeMillisEstimate: 0,
+      works: 2453,
+      advanced: 2452,
+      needTime: 0,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      docsExamined: 2452,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 2452,
+        executionTimeMillisEstimate: 0,
+        works: 2453,
+        advanced: 2452,
+        needTime: 0,
+        needYield: 0,
+        saveState: 0,
+        restoreState: 0,
+        isEOF: 1,
+        keyPattern: { gender: 1 },
+        indexName: 'gender_1',
+        isMultiKey: false,
+        multiKeyPaths: { gender: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { gender: [ '[&quot;male&quot;, &quot;male&quot;]' ] },
+        keysExamined: 2452,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
+    }
+  },
+  command: {
+    find: 'randomusers',
+    filter: { gender: 'male' },
+    '$db': 'formation'
+  },
+  serverInfo: {
+    host: 'b42a0b2f8d25',
+    port: 27017,
+    version: '8.0.3',
+    gitVersion: '89d97f2744a2b9851ddfb51bdf22f687562d9b06'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+</div></section></section><section class="chapter"><h3 id="a-vous" data-toc="a-vous">A vous</h3><ul class="list _bullet" id="-wxqg4i_52"><li class="list__item" id="-wxqg4i_55"><p>faire une requ&ecirc;te sur <code class="code" id="-wxqg4i_58">name.first</code> avec un explain.</p></li><li class="list__item" id="-wxqg4i_56"><p>Cr&eacute;er un index sur <code class="code" id="-wxqg4i_59">name.first</code>.</p></li><li class="list__item" id="-wxqg4i_57"><p>Refaire la m&ecirc;me requ&ecirc;te et comparer le r&eacute;sultat.</p></li></ul><p id="-wxqg4i_53">Pour obtenir la liste des pr&eacute;noms distincts</p><div class="code-block" data-lang="mongodb">
+db.randomusers.distinct(&quot;name.first&quot;)
+</div></section><section class="chapter"><h3 id="index-composite" data-toc="index-composite">Index composite</h3><p id="-wxqg4i_60">Il est possible de cr&eacute;er un index sur un groupe de chant. Dans ce cas, MongoDB utilisera l'ensemble des valeurs pour constituer l'index. L'ordre des champs est important et nous prendrons garde &agrave; commencer par les champs qui ont le moins de valeurs r&eacute;p&eacute;t&eacute;es dans notre collection.</p><p id="-wxqg4i_61">Cet index acc&eacute;l&eacute;rera les requ&ecirc;tes sur le champ &acirc;ge et &eacute;galement les requ&ecirc;tes sur les champs &acirc;ge et gender.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.createIndex({'dob.age': 1, gender: 1})
+</div></section><section class="chapter"><h3 id="index-et-tri" data-toc="index-et-tri">Index et tri</h3><p id="-wxqg4i_63">Les index &eacute;galement grandement acc&eacute;l&eacute;rer le tri. Dans certains cas, ils sont m&ecirc;me indispensables, car si la collection r&eacute;sultant d'une requ&ecirc;te fait plus de 32 Mo, MongoDB sera incapable de la trier, sauf si ce tri a d&eacute;j&agrave; &eacute;t&eacute; effectu&eacute; dans un index.</p></section><section class="chapter"><h3 id="index-unique" data-toc="index-unique">Index unique</h3><p id="-wxqg4i_64">Les indexes peuvent &eacute;galement inclure une contrainte d'unicit&eacute;.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.createIndex(
+    {email: 1},
+    {unique: true}
+)
+</div></section><section class="chapter"><h3 id="un-cas-particulier" data-toc="un-cas-particulier">Un cas particulier</h3><p id="-wxqg4i_66">Imaginons que nous souhaitions poser un index unique sur un champ facultatif. L'absence de valeur sera consid&eacute;r&eacute;e par MongoDB comme un doublon et nous ne pourrons ins&eacute;rer plus d'un document omettant le champ unique.</p><p id="-wxqg4i_67">Pour pallier ce probl&egrave;me, il nous faudra ajouter une contrainte sur l'index et ainsi indiquer une condition d'indexation.</p><p id="-wxqg4i_68">Commen&ccedil;ons par supprimer l'&eacute;ventuel index d&eacute;j&agrave; existant.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.dropIndex({{email: 1}})
+</div><p id="-wxqg4i_70">Puis cr&eacute;ons un index partiel qui ne s'appliquera qu'aux documents remplissant une condition.</p><div class="code-block" data-lang="mongodb">
+db.randomusers.createIndex(
+  {'email': 1},
+  {
+    unique: true,
+    partialFilterExpression: {email; {exists: true}}
+  }
+)
+</div></section><section class="chapter"><h3 id="visualiser-les-index" data-toc="visualiser-les-index">Visualiser les index</h3><div class="code-block" data-lang="mongodb">
+db.randomusers.getIndexes()
+</div></section></section><div class="last-modified">Last modified: 23 février 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="005-00-agregation.html" class="navigation-links__prev">Agr&eacute;gation</a><a href="007-00-adminstration.html" class="navigation-links__next">Administration</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.10.0-b575/app.js"></script></body></html>
